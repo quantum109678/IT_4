@@ -86,7 +86,7 @@ void bestfit(int blockSize[], int num_of_blocks, int processSize[],int num_of_pr
 
 	printf("\nThe best fit memory allocation is as follows:\n");
 
-	printf("Process number\tProcess Size\tBlock number\tFragment size\n");
+	printf("Process number\tProcess Size\tBlock number\tInternal fragment size(if any)\n");
 
 	for(int i=0;i<num_of_pro;i++){
 
@@ -103,17 +103,17 @@ void bestfit(int blockSize[], int num_of_blocks, int processSize[],int num_of_pr
 				}
 
 
-			printf("%d\t\t%d\t\t%d\t\t%d\n",i,processSize[i],cur+1,blockSize[alloc[i]]);
+			printf("%d\t\t%d\t\t%d\t\t%d\n",i+1,processSize[i],cur+1,blockSize[alloc[i]]);
 		}
 
 		else if(alloc[i]==-10){
 
-			printf("%d\t\t%d\t\tExternal fragmentation\n",i,processSize[i]);
+			printf("%d\t\t%d\t\tExternal fragmentation\n",i+1,processSize[i]);
 		}
 
 		else{
 
-			printf("%d\t\t%d\t\tMemory not allocated\n",i,processSize[i]);
+			printf("%d\t\t%d\t\tMemory not allocated\n",i+1,processSize[i]);
 		}
 	}
 
@@ -165,23 +165,23 @@ void firstfit(int blockSize[], int num_of_blocks, int processSize[], int num_of_
 
 	printf("\nThe first fit memory allocation is as follows:\n");
 
-	printf("Process number\tProcess Size\tBlock number\tFragment size\n");
+	printf("Process number\tProcess Size\tBlock number\tInternal fragment size(if any)\n");
 
 	for(int i=0;i<num_of_pro;i++){
 
 		if(alloc[i]>=0){
 
-			printf("%d\t\t%d\t\t%d\t\t%d\n",i,processSize[i],alloc[i]+1,blockSize[alloc[i]]);
+			printf("%d\t\t%d\t\t%d\t\t%d\n",i+1,processSize[i],alloc[i]+1,blockSize[alloc[i]]);
 		}
 
 		else if(alloc[i]==-10){
 
-			printf("%d\t\t%d\t\tExternal fragmentation\n",i,processSize[i]);
+			printf("%d\t\t%d\t\tExternal fragmentation\n",i+1,processSize[i]);
 		}
 
 		else{
 
-			printf("%d\t\t%d\t\tMemory not allocated\n",i,processSize[i]);
+			printf("%d\t\t%d\t\tMemory not allocated\n",i+1,processSize[i]);
 		}
 	}
 
@@ -271,7 +271,7 @@ void worstfit(int blockSize[], int num_of_blocks, int processSize[], int num_of_
 
 	printf("\nThe worst fit memory allocation is as follows:\n");
 
-	printf("Process number\tProcess Size\tBlock number\tFragment size\n");
+	printf("Process number\tProcess Size\tBlock number\tInternal fragment size(if any)\n");
 
 	for(int i=0;i<num_of_pro;i++){
 
@@ -292,7 +292,7 @@ void worstfit(int blockSize[], int num_of_blocks, int processSize[], int num_of_
 				
 			
 
-			printf("%d\t\t%d\t\t%d\t\t%d\n",i,processSize[i],cur+1,blockSize[alloc[i]]);
+			printf("%d\t\t%d\t\t%d\t\t%d\n",i+1,processSize[i],cur+1,blockSize[alloc[i]]);
 		}
 
 			
@@ -300,12 +300,12 @@ void worstfit(int blockSize[], int num_of_blocks, int processSize[], int num_of_
 
 		else if(alloc[i]==-10){
 
-			printf("%d\t\t%d\t\tExternal fragmentation\n",i,processSize[i]);
+			printf("%d\t\t%d\t\tExternal fragmentation\n",i+1,processSize[i]);
 		}
 
 		else{
 
-			printf("%d\t\t%d\t\tMemory not allocated\n",i,processSize[i]);
+			printf("%d\t\t%d\t\tMemory not allocated\n",i+1,processSize[i]);
 		}
 	}
 
@@ -314,38 +314,40 @@ void worstfit(int blockSize[], int num_of_blocks, int processSize[], int num_of_
 }
 
 int main(){
-	int num_of_blocks,num_of_pro;
-
-	printf("Enter the number of number of blocks of memory:");
-	
-	scanf("%d",&num_of_blocks);
+	int num_of_blocks=5,num_of_pro=5;
 
 	int blockSize[num_of_blocks],blockSize_f[num_of_blocks],blockSize_w[num_of_blocks];
 
 	for(int i=0;i<num_of_blocks;i++){
 		
-		printf("Enter the blocksize of block %d:",(i+1));
-		
-		scanf("%d",&blockSize[i]);
-	}
+		blockSize[i]=(i+1)*100;
 
-	printf("Enter the number of number of processes:");
-	
-	scanf("%d",&num_of_pro);
+		blockSize_f[i]=(i+1)*100;
 
-	int processSize[num_of_pro];
-	
-	for(int i=0;i<num_of_pro;i++){
-		
-		printf("Enter the size of process %d:",(i+1));
-		
-		scanf("%d",&processSize[i]);
+		blockSize_w[i]=(i+1)*100;
 	}
 
 	for(int i=0;i<num_of_blocks;i++){
 
-		blockSize_w[i]=blockSize[i];
-		blockSize_f[i]=blockSize[i];
+		printf("Block:%d   Size:%d\n",(i+1),blockSize[i]);
+	}
+
+
+	int processSize[num_of_pro];
+
+	processSize[0]=250;
+
+	processSize[1]=199;
+
+	processSize[2]=275;
+
+	processSize[3]=10000;
+
+	processSize[4]=320;
+
+	for(int i=0;i<num_of_pro;i++){
+
+		printf("Process_number:%d   Size:%d\n",(i+1),processSize[i]);
 	}
 
 	firstfit(blockSize, num_of_blocks, processSize, num_of_pro);
