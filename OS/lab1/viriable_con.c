@@ -38,6 +38,8 @@ void allocate(struct Node** head_ref, int new_size)
 
 void deallocate(struct Node* node,int pro_size){
 
+	struct Node* ref=node;
+
 	while(1){
 
 		if(node->size==pro_size){
@@ -50,6 +52,26 @@ void deallocate(struct Node* node,int pro_size){
 		node=node->next;
 
 	}
+
+	
+
+}
+
+void merge(struct Node* ref){
+
+	while(ref->next!=NULL){
+
+		if(ref->type=='H' && ref->next->type=='H'){
+
+			ref->size=ref->size+ref->next->size;
+
+			ref->next=ref->next->next;
+ 
+		}
+
+		ref=ref->next;
+	}
+
 }
 
 void printList(struct Node *node)
@@ -71,11 +93,11 @@ void printList(struct Node *node)
 int main()
 {
 
-	int tot_size=240,processSize[]={50,15,45,25,39,26};
+	int tot_size=260,processSize[]={50,15,45,25,39,26,20};
 
 	printf("Total memory available:%dKB\n\n",tot_size);
 
-	for(int i=0;i<6;i++){
+	for(int i=0;i<7;i++){
 
 		printf("Process_number:%d   Process_size:%d\n",i+1,processSize[i]);
 	}
@@ -83,7 +105,7 @@ int main()
 	struct Node* head=NULL;
 
 
-	for(int i=0;i<6;i++){
+	for(int i=0;i<7;i++){
 
 		allocate(&head,processSize[i]);
 	}
@@ -92,7 +114,7 @@ int main()
 
 	printList(head);
 
-	printf("\nTerminating process numbers 2,3 & 5\n");
+	printf("\nTerminating process numbers 2,3,5 & 7\n");
 
 	deallocate(head,processSize[1]);
 
@@ -100,9 +122,13 @@ int main()
 
 	deallocate(head,processSize[4]);
 
-	printf("\nAfter allocating memory for each process:\n");
+	deallocate(head,processSize[6]);
+
+	merge(head);
 
 	printList(head);
+
+	first_fit()
   
  
   return 0;
