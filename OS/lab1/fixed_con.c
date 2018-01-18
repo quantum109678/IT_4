@@ -188,6 +188,7 @@ void worstfit(int blockSize[], int num_of_blocks, int processSize[], int num_of_
 
 		bs_dup[i]=blockSize[i];
 	}
+<<<<<<< HEAD
 
 
 	int alloc[num_of_pro];
@@ -207,6 +208,27 @@ void worstfit(int blockSize[], int num_of_blocks, int processSize[], int num_of_
 
 				temp=blockSize[i];
 
+=======
+
+
+	int alloc[num_of_pro];
+
+	int temp;
+
+	for(int i=0;i<num_of_pro;i++){
+
+		alloc[i]=-1;
+	}
+
+	for (int i=0;i<num_of_blocks-1;i++){
+
+		for(int j=i+1;j<num_of_blocks;j++){
+
+			if(blockSize[i]<blockSize[j]){
+
+				temp=blockSize[i];
+
+>>>>>>> c5e438908465c69a55020062b0554a1bac8ebc30
 				blockSize[i]=blockSize[j];
 
 				blockSize[j]=temp;
@@ -326,7 +348,11 @@ int main(){
 
 	int processSize[num_of_pro];
 
+<<<<<<< HEAD
 	processSize[0]=350;
+=======
+	processSize[0]=250;
+>>>>>>> c5e438908465c69a55020062b0554a1bac8ebc30
 
 	processSize[1]=199;
 

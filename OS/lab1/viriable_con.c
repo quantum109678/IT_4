@@ -144,6 +144,41 @@ void best_fit(struct Node* node,int pro_size){
 
 }
 
+void worst_fit(struct Node* node,int pro_size){
+
+	int rem;
+
+	while(node!=NULL){
+
+		if(node->type=='H' && node->size>=pro_size){
+
+			node->type='P';
+
+			rem=node->size-pro_size;
+
+			node->size=pro_size;
+
+			struct Node* new_node=(struct Node*) malloc(sizeof(struct Node));
+
+			new_node->size=rem;
+
+			new_node->type='H';
+
+			new_node->next=node->next;
+
+			node->next=new_node;
+
+			break;
+
+
+		}
+
+		node=node->next;
+
+	}
+
+}
+
 void internal_frag(struct Node *node){
 
 	int frag=0;
@@ -224,6 +259,10 @@ int main()
 
 	int dup_pro_size[]={19,38,43};
 
+	int dup_pro_size1[]={43,19,38};
+
+	int dup_pro_size2[]={19,43,38};
+
 	printf("\nFirst fit case:\n");
 
 	for(int i=0;i<3;i++){
@@ -234,8 +273,6 @@ int main()
 	printList(head);
 
 	internal_frag(head);
-
-	printf("jkfjdkjf");
 
 	deallocate(head,dup_pro_size[0]);
 
@@ -263,21 +300,55 @@ int main()
 
 	}
 
-
-	
-
-	printList(head);
-
 	printf("\nBest fit case:\n");
 
 	for(int i=0;i<3;i++){
 
-		best_fit(head,dup_pro_size[i]);
+		best_fit(head,dup_pro_size1[i]);
 	}
 
 	printList(head);
 
 	internal_frag(head);
+
+
+	deallocate(head,dup_pro_size1[0]);
+
+	deallocate(head,dup_pro_size1[1]);
+
+	merge(head);
+
+	struct Node *node1=(struct Node*) malloc(sizeof(struct Node));
+
+	node1=head;
+
+	while(node1!=NULL){
+
+		if(node1->size==38){
+
+			node1->type='H';
+
+			node1->size=45;
+
+			node1->next=NULL;
+
+		}
+
+		node1=node1->next;
+
+	}
+
+	printf("\nWorst fit case:\n");
+
+	for(int i=0;i<3;i++){
+
+		worst_fit(head,dup_pro_size2[i]);
+	}
+
+	printList(head);
+
+	internal_frag(head);
+
 
 
 
