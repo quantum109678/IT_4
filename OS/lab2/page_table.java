@@ -21,7 +21,9 @@ System.out.println("\nEnter no of frames");
 f=inp.nextInt();
 
 for(i=0;i<n;i++)
+
 page[i]=-1;
+
 System.out.println("\nEnter the page table\n");
 
 System.out.println("(Enter frame no as -1 if that page is not present in any frame)\n\n");
