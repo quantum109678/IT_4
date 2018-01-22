@@ -4,7 +4,7 @@ using namespace std;
 
 int main(){
 
-	int arr[]={5,8,2,6};
+	int arr[]={5,8,2,6,1};
 
 	static int count=0;
 
