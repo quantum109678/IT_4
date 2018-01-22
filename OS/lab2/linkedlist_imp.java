@@ -52,9 +52,22 @@ public class linkedlist_imp{
 
 		System.out.println("Suppose the logical address is "+log_add);
 
-		quo=log_add/page_size;
+		int quo=log_add/page_size;
 
 		offset=log_add%page_size;
+
+		int cfn=0;
+
+		for(PageFrame p:list){
+
+			if(p.page_no==quo){
+
+				cfn=p.frame_no;
+			}
+		}
+
+		System.out.println("Then the corresponding physical address="+(cfn*page_size+offset));
+
 
 	}
 }
