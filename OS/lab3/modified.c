@@ -7,7 +7,6 @@ struct Node
  
   int size;
   struct Node *next;
-  struct Node *previous;
   char type;
 };
 
@@ -28,6 +27,7 @@ void allocate(struct Node** head_ref, int new_size)
     if (*head_ref == NULL)
     {
        *head_ref = new_node;
+
        return;
     }
  
@@ -36,7 +36,7 @@ void allocate(struct Node** head_ref, int new_size)
  
     last->next = new_node;
 
-    new_node->previous=last;
+
 
     return;
 }
@@ -67,8 +67,6 @@ void merge(struct Node* ref){
 
             ref->size=ref->size+ref->next->size;
 
-            ref->next->next->previous=ref;
-
             ref->next=ref->next->next;
 
 
@@ -84,7 +82,11 @@ void shift(struct Node* ref){
 
     struct Node* last=ref;
 
-    struct Node* curr;
+    struct Node* new_node=(struct Node*) malloc(sizeof(struct Node));
+
+    new_node->type='H';
+
+    new_node->size=0;
 
     while(last->next!=NULL){
 
@@ -96,21 +98,25 @@ void shift(struct Node* ref){
 
         if(ref->type=='H'){
 
-            curr=ref;
+            new_node->size+=ref->size;
 
-            last->next=curr;
-
-            curr->previous->next=curr->next;
-
-            curr->previous=last;
-
-            curr->next=NULL;
-
-            last=last->next;
-        }
+         }
 
         ref=ref->next;
     }
+
+    while(ref->next!=NULL){
+
+        if(ref->next->type=='H'){
+
+            ref->next=ref->next->next;
+
+         }
+
+        ref=ref->next;
+    }
+
+    last->next=new_node;
 }
 
 
