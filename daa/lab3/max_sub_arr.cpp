@@ -71,8 +71,8 @@ std::tuple<int, int, int> maxSubArraySum(int arr[], int l, int h)
  }
 int main()
 {
-   int arr[] = {1,2,3,4,5};
-   int n = 5;
+   int arr[] = {-2, -5, 6, -2, -3, 1, 5, -6};
+   int n = 8;
    int max_sum,i,j; 
     std::tie(i,j,max_sum)=maxSubArraySum(arr, 0, n-1);
    printf("Maximum contiguous sum is %d\nThe indices are: %d %d\n", max_sum,i,j);
