@@ -145,30 +145,20 @@ void best_fit(struct Node* node,int pro_size){
 
 void worst_fit(struct Node* node,int pro_size){
 
-    int rem;
+    int curr=0;
+
+    struct Node* worst=(struct Node*) malloc(sizeof(struct Node));
 
     while(node!=NULL){
 
         if(node->type=='H' && node->size>=pro_size){
 
-            node->type='P';
+            if(curr<node->size-pro_size){
 
-            rem=node->size-pro_size;
+                curr=node->size-pro_size;
 
-            node->size=pro_size;
-
-            struct Node* new_node=(struct Node*) malloc(sizeof(struct Node));
-
-            new_node->size=rem;
-
-            new_node->type='H';
-
-            new_node->next=node->next;
-
-            node->next=new_node;
-
-            break;
-
+                worst=node;
+            }
 
         }
 
@@ -176,7 +166,23 @@ void worst_fit(struct Node* node,int pro_size){
 
     }
 
+    worst->type='P';
+
+    worst->size=pro_size;
+
+    struct Node* new_node=(struct Node*) malloc(sizeof(struct Node));
+
+    new_node->size=curr;
+
+    new_node->type='H';
+
+    new_node->next=worst->next;
+
+    worst->next=new_node;
+
 }
+
+
 
 void internal_frag(struct Node *node){
 
@@ -341,7 +347,7 @@ int main()
 
     for(int i=0;i<3;i++){
 
-        worst_fit(head,dup_pro_size2[i]);
+        worst_fit(head,dup_pro_size[i]);
     }
 
     printList(head);
