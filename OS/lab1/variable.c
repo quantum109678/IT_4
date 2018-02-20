@@ -110,36 +110,47 @@ void first_fit(struct Node* node,int pro_size){
 
 void best_fit(struct Node* node,int pro_size){
 
-    int rem;
+   int curr=0;
+
+    struct Node* best=(struct Node*) malloc(sizeof(struct Node));
 
     while(node!=NULL){
 
         if(node->type=='H' && node->size>=pro_size){
 
-            node->type='P';
+            if(curr==0){
 
-            rem=node->size-pro_size;
+                curr=node->size-pro_size;
 
-            node->size=pro_size;
+                best=node;
+            }
 
-            struct Node* new_node=(struct Node*) malloc(sizeof(struct Node));
+            if(curr>node->size-pro_size){
 
-            new_node->size=rem;
+                curr=node->size-pro_size;
 
-            new_node->type='H';
-
-            new_node->next=node->next;
-
-            node->next=new_node;
-
-            break;
-
+                best=node;
+            }
 
         }
 
         node=node->next;
 
     }
+
+    best->type='P';
+
+    best->size=pro_size;
+
+    struct Node* new_node=(struct Node*) malloc(sizeof(struct Node));
+
+    new_node->size=curr;
+
+    new_node->type='H';
+
+    new_node->next=best->next;
+
+    best->next=new_node;
 
 }
 
@@ -199,6 +210,8 @@ void internal_frag(struct Node *node){
     }
 
     printf("\nToatl internal fragmentation size=%d\n",frag);
+
+      
 
 }
 
@@ -264,10 +277,6 @@ int main()
 
     int dup_pro_size[]={19,38,43};
 
-    int dup_pro_size1[]={43,19,38};
-
-    int dup_pro_size2[]={19,43,38};
-
     printf("\nFirst fit case:\n");
 
     for(int i=0;i<3;i++){
@@ -282,6 +291,8 @@ int main()
     deallocate(head,dup_pro_size[0]);
 
     deallocate(head,dup_pro_size[1]);
+
+    //deallocate(head,dup_pro_size[2]);
 
     merge(head);
 
@@ -309,7 +320,7 @@ int main()
 
     for(int i=0;i<3;i++){
 
-        best_fit(head,dup_pro_size1[i]);
+        best_fit(head,dup_pro_size[i]);
     }
 
     printList(head);
@@ -317,9 +328,10 @@ int main()
     internal_frag(head);
 
 
-    deallocate(head,dup_pro_size1[0]);
+    deallocate(head,dup_pro_size[0]);
+    
 
-    deallocate(head,dup_pro_size1[1]);
+      deallocate(head,dup_pro_size[2]);
 
     merge(head);
 
@@ -353,6 +365,7 @@ int main()
     printList(head);
 
     internal_frag(head);
+
 
 
 
