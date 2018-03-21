@@ -1,11 +1,8 @@
 inp_file=open("input.txt",'r')
 lines=inp_file.readlines()
 n=len(lines[0].split())
-<<<<<<< HEAD
 
-=======
 print(n)
->>>>>>> c5e438908465c69a55020062b0554a1bac8ebc30
 men={}
 women={}
 m=lines[0].split()

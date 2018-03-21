@@ -31,8 +31,16 @@ def schedule(arr,n):
 
 
 L=[]
-n=input(int("Enter number of intervals:")
+
+def main():
+	n=int(input("Enter number of intervals:"))
+	for i in range(0,n):
+		v1,v2=input().split()
+		v1,v2=int(v1),int(v2)
+		L.append(v1,v2)
+	while len(L)!=0:
+		schedule(L,len(l))
 
 
-
-	
+if __name__ == '__main__':
+	main()
