@@ -82,6 +82,8 @@ void shift(struct Node* ref){
 
     struct Node* last=ref;
 
+    struct Node* dup=ref;
+
     struct Node* new_node=(struct Node*) malloc(sizeof(struct Node));
 
     new_node->type='H';
@@ -105,15 +107,15 @@ void shift(struct Node* ref){
         ref=ref->next;
     }
 
-    while(ref->next!=NULL){
+    while(dup->next!=NULL){
 
-        if(ref->next->type=='H'){
+        if(dup->next->type=='H'){
 
-            ref->next=ref->next->next;
+            dup->next=dup->next->next;
 
          }
 
-        ref=ref->next;
+        dup=dup->next;
     }
 
     last->next=new_node;

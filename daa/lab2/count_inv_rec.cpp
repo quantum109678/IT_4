@@ -1,7 +1,6 @@
 #include <iostream>
 #include <stdio.h>
-
-using namespace std;
+#include <stdlib.h>
 
 int count_inv(int arr[],int temp[],int low,int high);
 
@@ -81,6 +80,8 @@ int main(){
 	int ans=count_inv(arr,temp,0,4);
 
 	printf("%d",ans);
+
+	return 0;
 
 	
 }
