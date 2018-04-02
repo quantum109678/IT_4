@@ -10,7 +10,9 @@
 
 int main(int argc,char ** argv){
 
-	char s[80],f[80];
+	char w[80]="there",check[80];
+
+	int points=0;
 
 	struct sockaddr_in servadd,clienadd;
 
@@ -34,11 +36,17 @@ int main(int argc,char ** argv){
 
 	printf("Connection established\n");
 
-	read(connfd,f,80);
+	write(connfd,w,80);
 
-	printf("Filename:%s",f);
+	read(connfd,check,80);
+
+	if(strcmp(w,check)==0) points++;
+
+	printf("%d",points);
 
 	close(listenfd);
+
+
 
 	return 0;
 }
